@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aignite-groundwork"
+version = "0.1.0"
+description = "Shared spine of the AiGNITE portfolio: claim schema, LLM gateway, verification gates, tracing."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Nuwan Samaranayake" }]
+dependencies = [
+    "pydantic>=2",
+    "pydantic-settings",
+    "openai>=1.40",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[tool.setuptools]
+packages = ["groundwork"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
