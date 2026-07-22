@@ -29,6 +29,8 @@ for LLM Applications (2025)** and the **NIST AI Risk Management Framework — Ge
 `OPENROUTER_API_KEY` is read from the environment only. `.env` is gitignored. `LLMGateway`
 refuses to construct without a key rather than falling back to an unauthenticated call.
 
-## Reporting
+## Reporting a vulnerability
 
-Email the maintainer privately; do not open a public issue for a suspected vulnerability.
+Report suspected vulnerabilities privately to **nuwans@hotmail.com**. Do not open a public issue.
+You will receive an acknowledgment within 72 hours. Please allow time to investigate and ship a fix
+before any public disclosure; a coordinated disclosure timeline will be agreed with you.
