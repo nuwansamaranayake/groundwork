@@ -14,6 +14,14 @@ class BaseConfig(BaseSettings):
     log_level: str = "INFO"
     openrouter_api_key: str = ""
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
+    # Model pinning: model IDs come from env, never hardcoded. These bind the vars
+    # .env.example ships; apps extend BaseConfig with their own AppConfig fields.
+    llm_model_extraction: str = ""
+    embedding_model: str = ""
+    # Bounds for every gateway call. The SDK defaults (600s per attempt, 2 retries,
+    # ~30 min worst case) are unusable for the sole sanctioned LLM path.
+    llm_timeout_s: float = 30.0
+    llm_max_retries: int = 2
 
 
 def forbid_mock(cfg: BaseConfig, what: str) -> None:
