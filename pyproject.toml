@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aignite-groundwork"
-version = "0.1.0"
+version = "0.1.1"
 description = "Shared spine of the AiGNITE portfolio: claim schema, LLM gateway, verification gates, tracing."
 readme = "README.md"
 requires-python = ">=3.12"

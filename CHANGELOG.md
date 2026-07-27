@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-07-23
+
 ### Added
 - CI pipeline (`.github/workflows/ci.yml`): ruff lint and unit tests on Python 3.12 and 3.13.
 - `CODE_OF_CONDUCT.md` (Contributor Covenant 2.1) and a SECURITY.md vulnerability-reporting policy.
