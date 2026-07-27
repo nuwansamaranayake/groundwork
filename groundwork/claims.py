@@ -1,8 +1,8 @@
 from __future__ import annotations
-from datetime import date, datetime
+from datetime import date
 from enum import Enum
-from typing import Optional
-from pydantic import BaseModel, Field
+from typing import Literal, Optional
+from pydantic import AwareDatetime, BaseModel, Field
 
 
 class ClaimType(str, Enum):
@@ -25,20 +25,22 @@ class Extractor(BaseModel):
 
 
 class Verification(BaseModel):
-    status: str = "pending"            # pending | passed | rejected
+    status: Literal["pending", "passed", "rejected"] = "pending"
     gates: list[str] = Field(default_factory=list)
     score: Optional[float] = None
 
 
 class Claim(BaseModel):
     """The atom of the whole portfolio. Bitemporal: observed_at is when the fact was
-    true in the world, recorded_at is when the system learned it."""
+    true in the world (calendar-date resolution), recorded_at is the timezone-aware
+    instant (UTC by convention) when the system learned it. recorded_at must be
+    aware so cross-producer bitemporal ordering is never ambiguous."""
     claim_id: str
     type: ClaimType
     statement: str
     evidence_ref: EvidenceRef
     observed_at: Optional[date] = None
-    recorded_at: datetime
+    recorded_at: AwareDatetime
     extracted_by: Extractor
-    confidence: Optional[float] = None
+    confidence: Optional[float] = Field(default=None, ge=0.0, le=1.0)
     verification: Verification = Field(default_factory=Verification)
