@@ -14,7 +14,7 @@ thesis is enforced the same way everywhere.
 |--------|----------------|
 | `groundwork.claims` | `Claim`, the bitemporal, evidence-carrying atom of the whole portfolio, plus `ClaimType`, `EvidenceRef`, `Extractor`, `Verification`. |
 | `groundwork.config` | `BaseConfig` (Pydantic settings) and `forbid_mock()`: Standard 3 enforced in code, no silent mock/fallback outside development. |
-| `groundwork.gateway` | `LLMGateway`, the *only* sanctioned path to a model. OpenRouter (OpenAI-compatible), model IDs pinned from env, JSON-schema structured output, every call traced. |
+| `groundwork.gateway` | `LLMGateway`, the *only* sanctioned path to a model. OpenRouter (OpenAI-compatible), model IDs bound from env config (`BaseConfig` fields, extended by each app's `AppConfig`), JSON-schema structured output, bounded timeout/retries, every call traced — success or failure. Raises typed `GatewayError` on empty completions. |
 | `groundwork.trace` | `record_call()`: every LLM call becomes a structured trace. This log stream is the raw material Seismograph will consume. |
 | `groundwork.verification` | `Gate` protocol, `SchemaGate` (no naked claims), `NLIGate` (entailment interface; raises until an app injects a model). |
 
@@ -58,5 +58,9 @@ make lint     # ruff
 
 ## Doctrine
 
-Read `DOCTRINE.md`. Every rule there is enforced somewhere in this library. `NLIGate` raising
+Read `DOCTRINE.md`. This library enforces the rules that make sense at library scope: Standard 3
+(no silent mock/fallback) via `forbid_mock()`, provenance via the `Claim` schema and `SchemaGate`,
+one sanctioned LLM path via `LLMGateway`, and trace-everything via `record_call()`. Standards 2
+(smoke tests), 4 (migration table counts), and 6 (contracts.md) are enforced in the app repos,
+which have service surfaces and databases; groundwork has neither. `NLIGate` raising
 `NotImplementedError` until wired is deliberate: the portfolio would rather fail loud than fabricate.

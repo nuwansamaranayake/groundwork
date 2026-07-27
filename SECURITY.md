@@ -14,7 +14,7 @@ for LLM Applications (2025)** and the **NIST AI Risk Management Framework — Ge
 | LLM04 | Data & Model Poisoning | Claims carry `evidence_ref` + `extracted_by` provenance; `SchemaGate` rejects naked claims with no source. |
 | LLM05 | Improper Output Handling | Structured output + downstream deterministic gates mean model text is treated as an untrusted proposal, never as a decision. |
 | LLM06 | Excessive Agency | The library computes nothing consequential; it only *proposes* claims. Decisions and actions live in app-layer deterministic code with human approval. |
-| LLM08 | Vector/Embedding Weaknesses | Embedding model IDs are pinned from env, not hardcoded, so a poisoned/deprecated model can be swapped centrally. |
+| LLM08 | Vector/Embedding Weaknesses | Model IDs — including `embedding_model` — are bound from env via `BaseConfig`, never hardcoded, so a deprecated or poisoned model can be swapped centrally. groundwork itself ships no embedding call path yet; apps that embed read the pinned ID from config. |
 | LLM09 | Misinformation | The whole design — sense vs. decide, provenance on every claim — exists to keep unverified model output from masquerading as fact. |
 
 ## NIST GenAI baseline
