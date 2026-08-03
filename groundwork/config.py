@@ -13,6 +13,11 @@ class BaseConfig(BaseSettings):
     app_env: Env = Env.development
     log_level: str = "INFO"
     openrouter_api_key: str = ""
+    # Demo sessions (the shared demo kit): scoped, budgeted, expiring. Every app inherits
+    # these; the kit itself takes them as constructor arguments.
+    demo_session_ttl_seconds: int = 1800
+    demo_request_budget: int = 60
+    demo_sessions_per_ip_hour: int = 10
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
     # Model pinning: model IDs come from env, never hardcoded. These bind the vars
     # .env.example ships; apps extend BaseConfig with their own AppConfig fields.

@@ -7,10 +7,18 @@ from .config import BaseConfig, Env, forbid_mock
 from .gateway import GatewayError, LLMGateway
 from .trace import configure_tracing, record_call
 from .verification import Gate, SchemaGate, NLIGate
+from .web import build_version
+from .demokit import DemoKit, DemoRefused, ScopeDenied, guard_prefix, new_tenant_prefix
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = [
+    "build_version",
+    "DemoKit",
+    "DemoRefused",
+    "ScopeDenied",
+    "guard_prefix",
+    "new_tenant_prefix",
     "Claim",
     "ClaimType",
     "EvidenceRef",
